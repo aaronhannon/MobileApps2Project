@@ -12,6 +12,9 @@ namespace MobileApps2Project
         public MainPage()
         {
             InitializeComponent();
+
+
+            
         }
     }
 }

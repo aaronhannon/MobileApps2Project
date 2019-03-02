@@ -11,7 +11,11 @@ namespace MobileApps2Project
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("#348730"),
+                BarTextColor = Color.White
+            };
         }
 
         protected override void OnStart()

@@ -30,6 +30,7 @@ namespace MobileApps2Project.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
         }
 
         /// <summary>

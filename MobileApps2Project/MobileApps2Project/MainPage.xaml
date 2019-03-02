@@ -4,11 +4,23 @@
              xmlns:local="clr-namespace:MobileApps2Project"
              x:Class="MobileApps2Project.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here 111-->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+
+
+    <StackLayout Margin="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Text="Save" Grid.Row="0"/>
+            <Button Text="Delete"  Grid.Row="1"/>
+        </Grid>
+       
+
     </StackLayout>
 
+    <ContentPage.ToolbarItems>
+        
+        
+    </ContentPage.ToolbarItems>
 </ContentPage>

@@ -6,21 +6,25 @@
 
 
 
-    <StackLayout Margin="20">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button Text="Save" Grid.Row="0"/>
-            <Button Text="Delete"  Grid.Row="1"/>
-        </Grid>
-       
+    <ContentPage.Content>
+        <StackLayout>
 
-    </StackLayout>
+            <StackLayout x:Name="toolbarStk">
+                <Label x:Name="bar"/>
+            </StackLayout>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button x:Name="newGameBtn" Grid.Row="0"/>
 
-    <ContentPage.ToolbarItems>
-        
-        
-    </ContentPage.ToolbarItems>
+            </Grid>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+
+
 </ContentPage>

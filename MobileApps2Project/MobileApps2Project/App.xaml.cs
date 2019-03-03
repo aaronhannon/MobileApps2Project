@@ -12,7 +12,7 @@ namespace MobileApps2Project
             InitializeComponent();
 
             //Toolbar
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage());
           
         }
 

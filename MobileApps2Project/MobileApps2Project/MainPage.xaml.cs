@@ -12,6 +12,7 @@ namespace MobileApps2Project
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             toolbarStk.BackgroundColor = Color.FromHex("#3f7247");
             toolbarStk.HeightRequest = 55;
@@ -28,6 +29,12 @@ namespace MobileApps2Project
             newGameBtn.HeightRequest = 50;
             newGameBtn.BackgroundColor = Color.FromHex("#e2e2e2");
             
+        }
+
+        private async void NewGameBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MatchSettings());
+
         }
     }
 }

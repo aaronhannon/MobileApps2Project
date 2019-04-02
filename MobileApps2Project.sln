@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileApps2Project.iOS", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileApps2Project.UWP", "MobileApps2Project\MobileApps2Project.UWP\MobileApps2Project.UWP.csproj", "{EDF5CFD5-9BD3-42C2-9380-1EE6EFFB1BE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileApps2Project", "MobileApps2Project\MobileApps2Project\MobileApps2Project.csproj", "{CF2A28DE-494C-4BCC-ACCA-35BB9D54D4CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileApps2Project", "MobileApps2Project\MobileApps2Project\MobileApps2Project.csproj", "{CF2A28DE-494C-4BCC-ACCA-35BB9D54D4CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,8 +91,6 @@ Global
 		{BD090B53-22CA-4202-9D06-C377C916F8A9}.Debug|x64.Build.0 = Debug|Any CPU
 		{BD090B53-22CA-4202-9D06-C377C916F8A9}.Debug|x64.Deploy.0 = Debug|Any CPU
 		{BD090B53-22CA-4202-9D06-C377C916F8A9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BD090B53-22CA-4202-9D06-C377C916F8A9}.Debug|x86.Build.0 = Debug|Any CPU
-		{BD090B53-22CA-4202-9D06-C377C916F8A9}.Debug|x86.Deploy.0 = Debug|Any CPU
 		{BD090B53-22CA-4202-9D06-C377C916F8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD090B53-22CA-4202-9D06-C377C916F8A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD090B53-22CA-4202-9D06-C377C916F8A9}.Release|Any CPU.Deploy.0 = Release|Any CPU
@@ -163,7 +161,6 @@ Global
 		{FAF678DB-8CFA-45F3-82B9-8A3929E1A3ED}.Debug|x64.Build.0 = Debug|iPhone
 		{FAF678DB-8CFA-45F3-82B9-8A3929E1A3ED}.Debug|x64.Deploy.0 = Debug|iPhone
 		{FAF678DB-8CFA-45F3-82B9-8A3929E1A3ED}.Debug|x86.ActiveCfg = Debug|iPhone
-		{FAF678DB-8CFA-45F3-82B9-8A3929E1A3ED}.Debug|x86.Build.0 = Debug|iPhone
 		{FAF678DB-8CFA-45F3-82B9-8A3929E1A3ED}.Debug|x86.Deploy.0 = Debug|iPhone
 		{FAF678DB-8CFA-45F3-82B9-8A3929E1A3ED}.Release|Any CPU.ActiveCfg = Release|iPhone
 		{FAF678DB-8CFA-45F3-82B9-8A3929E1A3ED}.Release|Any CPU.Build.0 = Release|iPhone

@@ -33,7 +33,7 @@ namespace MobileApps2Project
 
         private async void NewGameBtn_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MatchSettings());
+            await Navigation.PushAsync(new MatchSettingsPage());
 
         }
     }

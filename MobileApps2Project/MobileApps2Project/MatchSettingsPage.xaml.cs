@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,9 +14,11 @@ using Xamarin.Forms.Xaml;
 namespace MobileApps2Project
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MatchSettingsPage : ContentPage
+    public partial class MatchSettingsPage : INotifyPropertyChanged
     {
-        public MatchSettings ms;
+        Entry player1;
+        Entry player2;
+        Entry testStartScore;
 
         public MatchSettingsPage()
         {
@@ -62,7 +66,7 @@ namespace MobileApps2Project
                 FontAttributes = FontAttributes.Bold
             };
 
-            Entry player1 = new Entry()
+            player1 = new Entry()
             {
                 Placeholder = "Player 1",
                 WidthRequest = 200,
@@ -71,7 +75,7 @@ namespace MobileApps2Project
                 VerticalOptions = LayoutOptions.Center
             };
 
-            Entry player2 = new Entry()
+            player2 = new Entry()
             {
                 Placeholder = "Player 2",
                 WidthRequest = 200,
@@ -80,7 +84,7 @@ namespace MobileApps2Project
                 VerticalOptions = LayoutOptions.Center
             };
 
-            Entry testStartScore = new Entry()
+            testStartScore = new Entry()
             {
                 Placeholder = "301,501,701",
                 WidthRequest = 200,
@@ -97,12 +101,7 @@ namespace MobileApps2Project
 
             };
 
-            //INOTIFYPROPERITYCHANGED
-            MatchSettings matchSettings = new MatchSettings(player1.Text, player2.Text, testStartScore.Text);
-
-            startBtn.Clicked += new EventHandler(
-                (sender, e) => StartBtn_Clicked(sender, e,matchSettings)
-            );
+            startBtn.Clicked += StartBtn_Clicked;
 
             settingsGrd.Children.Add(l1, 0, 0);
             settingsGrd.Children.Add(l2, 0, 1);
@@ -118,9 +117,9 @@ namespace MobileApps2Project
 
 
 
-        private async void StartBtn_Clicked(object sender, EventArgs e,MatchSettings ms)
+        private async void StartBtn_Clicked(object sender, EventArgs e)
         {
-
+            MatchSettings ms = new MatchSettings(player1.Text,player2.Text,testStartScore.Text);
             await Navigation.PushAsync(new MatchPage(ms));
         }
     }

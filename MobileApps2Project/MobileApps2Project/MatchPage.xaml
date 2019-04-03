@@ -11,7 +11,7 @@
 
             <Grid x:Name="stats" Margin="-8" Padding="0" ColumnSpacing="0" RowSpacing="0" BackgroundColor="White">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="150"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -22,7 +22,9 @@
                     </Grid.ColumnDefinitions>
                     
                     <Label x:Name="l1" HorizontalOptions="Center" VerticalOptions="Center" Text="TEST1" Grid.Column="0"/>
+                    <Label Margin="20" x:Name="check1" HorizontalOptions="Center" VerticalOptions="End" Text="TEST1" Grid.Column="0"/>
                     <Label x:Name="l2" HorizontalOptions="Center" VerticalOptions="Center" Text="TEST2" Grid.Column="1"/>
+                    <Label Margin="20" x:Name="check2" HorizontalOptions="Center" VerticalOptions="End" Text="TEST2" Grid.Column="1"/>
 
                 </Grid>
 

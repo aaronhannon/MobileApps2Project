@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -19,10 +22,126 @@ namespace MobileApps2Project
         public int p2Score;
         public int playerTurn = 1;
 
+        List<KeyValuePair<string, string>> checkouts;
+
         public MatchPage(MatchSettings ms)
         {
 
             InitializeComponent();
+            matchSettings = ms;
+            UISetup();
+            SetupCheckouts();
+
+
+
+        }
+
+        private void SetupCheckouts()
+        {
+            checkouts = new List<KeyValuePair<string, string>>();
+            string key;
+            string line;
+            string checkout;
+            const string NAME = "MobileApps2Project.checkouts.txt";
+            //string path = Environment.GetFolderPath(
+            //Environment.SpecialFolder.LocalApplicationData);
+            //string filename = Path.Combine(path, "checkouts.txt");
+            // Read the file and display it line by line.
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            using (Stream stream = assembly.GetManifestResourceStream(NAME))
+            {
+                StreamReader file = new StreamReader(stream);
+                while ((line = file.ReadLine()) != null)
+                {
+                    key = line.Substring(0, 3);
+                    key = Regex.Replace(key, @"[^0-9a-zA-Z]+", "");
+                    checkout = line.Substring(4);
+                    checkout = Regex.Replace(checkout, @"[^0-9a-zA-Z]+", " ");
+                    checkout = checkout.Trim();
+
+                    checkouts.Add(new KeyValuePair<string, string>(key, checkout));
+
+                    //Debug.WriteLine(key.Length+" "+key);
+                    //Debug.WriteLine(checkout);
+
+                }
+            }
+
+            //foreach (var x in checkouts)
+            //{
+            //    Debug.WriteLine(x);
+            //}
+        }
+
+        private void Enter_Clicked(object sender, EventArgs e)
+        {
+            string checkout;
+
+            if (playerTurn == 1)
+            {
+
+                p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
+                l1.Text = p1Score.ToString();
+                checkout = searchCheckouts(l1.Text);
+                check1.Text = checkout;
+                score.Text = "";
+                playerTurn = 2;
+
+                
+
+            }
+            else
+            {
+                p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
+                l2.Text = p2Score.ToString();
+                checkout = searchCheckouts(l2.Text);
+                check2.Text = checkout;
+                score.Text = "";
+                playerTurn = 1;
+            }
+
+        }
+
+        private string searchCheckouts(string score)
+        {
+            string checkout = "No checkout";
+
+            foreach (var x in checkouts)
+            {
+                if (x.Key.Equals(score))
+                {
+                    checkout = x.Value;
+                    Debug.WriteLine(checkout);
+                    return checkout;
+                }
+            }
+
+            return checkout;
+        }
+
+        private void BtnAdd_Clicked(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            //if(score.Text.Length < 4)
+            score.Text += btn.StyleId;
+        }
+
+        private void BtnRemove_Clicked(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+
+            string s = score.Text;
+
+            if(s.Length > 0) s = s.Remove(s.Length - 1);
+
+            score.Text = s;
+        }
+
+
+        private void UISetup()
+        {
 
             NavigationPage.SetHasNavigationBar(this, false);
 
@@ -36,9 +155,6 @@ namespace MobileApps2Project
             bar.TextColor = Color.White;
             bar.FontSize = 18;
             bar.FontAttributes = FontAttributes.Bold;
-
-
-            matchSettings = ms;
 
             //textSettings.Text = matchSettings.p1Name + "askdlfhalskdjfh";
 
@@ -58,10 +174,11 @@ namespace MobileApps2Project
                 VerticalOptions = LayoutOptions.Center
             };
 
-            buttons.Children.Add(score,1,0);
+            buttons.Children.Add(score, 1, 0);
             int counter = 0;
 
-            Button enter = new Button() {
+            Button enter = new Button()
+            {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 BackgroundColor = Color.Blue,
@@ -98,8 +215,9 @@ namespace MobileApps2Project
 
                         buttons.Children.Add(btn, j, i);
                     }
-                    else {
-                        if(j == 1)
+                    else
+                    {
+                        if (j == 1)
                         {
 
                             Button btn = new Button()
@@ -136,48 +254,6 @@ namespace MobileApps2Project
                     }
                 }
             }
-
-            
-
-
-
-        }
-
-        private void Enter_Clicked(object sender, EventArgs e)
-        {
-            if (playerTurn == 1)
-            {
-                p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
-                l1.Text = p1Score.ToString();
-                score.Text = "";
-                playerTurn = 2;
-            }
-            else
-            {
-                p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
-                l2.Text = p2Score.ToString();
-                score.Text = "";
-                playerTurn = 1;
-            }
-
-        }
-
-        private void BtnAdd_Clicked(object sender, EventArgs e)
-        {
-            Button btn = sender as Button;
-            //if(score.Text.Length < 4)
-            score.Text += btn.StyleId;
-        }
-
-        private void BtnRemove_Clicked(object sender, EventArgs e)
-        {
-            Button btn = sender as Button;
-
-            string s = score.Text;
-
-            if(s.Length > 0) s = s.Remove(s.Length - 1);
-
-            score.Text = s;
         }
     }
 }

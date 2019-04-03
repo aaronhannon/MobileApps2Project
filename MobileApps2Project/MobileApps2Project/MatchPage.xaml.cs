@@ -14,6 +14,10 @@ namespace MobileApps2Project
 	public partial class MatchPage : ContentPage
 	{
         public MatchSettings matchSettings;
+        public Entry score;
+        public int p1Score;
+        public int p2Score;
+        public int playerTurn = 1;
 
         public MatchPage(MatchSettings ms)
         {
@@ -45,7 +49,30 @@ namespace MobileApps2Project
             Debug.WriteLine(matchSettings.p2Name);
             Debug.WriteLine(matchSettings.startScore);
 
+            score = new Entry()
+            {
+                Placeholder = "SCORE",
+                WidthRequest = 150,
+                HeightRequest = 35,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            buttons.Children.Add(score,1,0);
             int counter = 0;
+
+            Button enter = new Button() {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = Color.Blue,
+                StyleId = "0",
+                Text = "Enter",
+                TextColor = Color.White
+            };
+
+            enter.Clicked += Enter_Clicked;
+
+            buttons.Children.Add(enter, 2, 0);
 
             //ROWS
             for (int i = 1; i < 5; i++)
@@ -57,41 +84,53 @@ namespace MobileApps2Project
 
                     if (i < 4)
                     {
-                        buttons.Children.Add(
-                        new Button()
+                        Button btn = new Button()
                         {
                             HorizontalOptions = LayoutOptions.FillAndExpand,
                             VerticalOptions = LayoutOptions.FillAndExpand,
                             BackgroundColor = Color.DarkSlateGray,
                             Text = counter.ToString(),
+                            StyleId = counter.ToString(),
                             TextColor = Color.White
-                        }, j, i);
+                        };
 
+                        btn.Clicked += BtnAdd_Clicked;
+
+                        buttons.Children.Add(btn, j, i);
                     }
                     else {
                         if(j == 1)
                         {
-                            buttons.Children.Add(
-                            new Button()
+
+                            Button btn = new Button()
                             {
                                 HorizontalOptions = LayoutOptions.FillAndExpand,
                                 VerticalOptions = LayoutOptions.FillAndExpand,
                                 BackgroundColor = Color.DarkSlateGray,
+                                StyleId = "0",
                                 Text = "0",
                                 TextColor = Color.White
-                            }, j, i);
+                            };
+
+                            btn.Clicked += BtnAdd_Clicked;
+
+                            buttons.Children.Add(btn, j, i);
                         }
                         else if (j == 2)
                         {
-                            buttons.Children.Add(
-                            new Button()
+
+                            Button btn = new Button()
                             {
                                 HorizontalOptions = LayoutOptions.FillAndExpand,
                                 VerticalOptions = LayoutOptions.FillAndExpand,
                                 BackgroundColor = Color.DarkSlateGray,
                                 Text = "DEL",
                                 TextColor = Color.White
-                            }, j, i);
+                            };
+
+                            btn.Clicked += BtnRemove_Clicked;
+
+                            buttons.Children.Add(btn, j, i);
                         }
 
                     }
@@ -103,5 +142,42 @@ namespace MobileApps2Project
 
 
         }
-	}
+
+        private void Enter_Clicked(object sender, EventArgs e)
+        {
+            if (playerTurn == 1)
+            {
+                p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
+                l1.Text = p1Score.ToString();
+                score.Text = "";
+                playerTurn = 2;
+            }
+            else
+            {
+                p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
+                l2.Text = p2Score.ToString();
+                score.Text = "";
+                playerTurn = 1;
+            }
+
+        }
+
+        private void BtnAdd_Clicked(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            //if(score.Text.Length < 4)
+            score.Text += btn.StyleId;
+        }
+
+        private void BtnRemove_Clicked(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+
+            string s = score.Text;
+
+            if(s.Length > 0) s = s.Remove(s.Length - 1);
+
+            score.Text = s;
+        }
+    }
 }

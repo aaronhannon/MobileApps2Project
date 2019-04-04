@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace MobileApps2Project
         public int playerTurn = 1;
 
         List<KeyValuePair<string, string>> checkouts;
+        ObservableCollection<Checkout> checkoutList;
 
         public MatchPage(MatchSettings ms)
         {
@@ -32,6 +34,12 @@ namespace MobileApps2Project
             UISetup();
             SetupCheckouts();
 
+            MongoService mg = new MongoService();
+            //checkoutList = mg.GetAllData();
+            mg.GetAllData();
+            //var list = mg.GetAllData();
+
+            //Debug.WriteLine(list.ToString());
 
 
         }

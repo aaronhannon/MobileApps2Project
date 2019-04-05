@@ -11,6 +11,7 @@ namespace MobileApps2Project
 {
     class MongoService
     {
+        public List<Checkout> checkouts;
         public string dbName = "mongo_database";
         public string collectionName = "checkout";
         public IMongoCollection<Checkout> mongoCollection;
@@ -40,26 +41,19 @@ namespace MobileApps2Project
 
         public List<Checkout> GetAllData()
         {
-        
+            checkouts = new List<Checkout>();
             var allData = MongoCollection.Find(new BsonDocument()).ToList();
-
-            Debug.WriteLine("HI");
-            PrintDebug();
 
             foreach (var x in allData)
             {
-                Checkout c = new Checkout(x.id,x.score, x.checkoutString);
-                Debug.WriteLine(c.id+" " + c.checkoutString + " " + c.score);
+                foreach (var c in x.checkouts)
+                {
+                    checkouts.Add(new Checkout(c.score, c.checkoutString));
+                    Debug.WriteLine("MONGOSERVICE: " + c.score +": "+ c.checkoutString);
+                }   
             }
 
-            return allData;
-
-
-        }
-
-        public void PrintDebug()
-        {
-            Debug.WriteLine("PRINTDEBUG11");
+            return checkouts;
         }
 
     }

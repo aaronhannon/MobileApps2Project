@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -22,9 +23,17 @@ namespace MobileApps2Project
         public int p1Score;
         public int p2Score;
         public int playerTurn = 1;
+        public const string CONVERTED = "converted.txt";
 
         List<KeyValuePair<string, string>> checkouts;
-        ObservableCollection<Checkout> checkoutList;
+        List<Checkout> checkoutList;
+        List<CheckoutStrings> convertJSON;
+
+        public MatchPage()
+        {
+            InitializeComponent();
+
+        }
 
         public MatchPage(MatchSettings ms)
         {
@@ -34,53 +43,82 @@ namespace MobileApps2Project
             UISetup();
             SetupCheckouts();
 
-            MongoService mg = new MongoService();
-            //checkoutList = mg.GetAllData();
-            mg.GetAllData();
-            //var list = mg.GetAllData();
-
-            //Debug.WriteLine(list.ToString());
-
-
         }
 
-        private void SetupCheckouts()
+        public void SetupCheckouts()
         {
-            checkouts = new List<KeyValuePair<string, string>>();
-            string key;
-            string line;
-            string checkout;
-            const string NAME = "MobileApps2Project.checkouts.txt";
-            //string path = Environment.GetFolderPath(
-            //Environment.SpecialFolder.LocalApplicationData);
-            //string filename = Path.Combine(path, "checkouts.txt");
-            // Read the file and display it line by line.
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
-
-            using (Stream stream = assembly.GetManifestResourceStream(NAME))
+            Task task1 = Task.Factory.StartNew(() =>
             {
-                StreamReader file = new StreamReader(stream);
-                while ((line = file.ReadLine()) != null)
+                //try
+                //{
+                    MongoService mg = new MongoService();
+                    checkoutList = mg.GetAllData();
+
+                
+                foreach (var c in checkoutList)
                 {
-                    key = line.Substring(0, 3);
-                    key = Regex.Replace(key, @"[^0-9a-zA-Z]+", "");
-                    checkout = line.Substring(4);
-                    checkout = Regex.Replace(checkout, @"[^0-9a-zA-Z]+", " ");
-                    checkout = checkout.Trim();
-
-                    checkouts.Add(new KeyValuePair<string, string>(key, checkout));
-
-                    //Debug.WriteLine(key.Length+" "+key);
-                    //Debug.WriteLine(checkout);
-
+                    Debug.WriteLine("MATCHPAGE: " + c.score + ": " + c.checkoutString);
                 }
-            }
 
-            //foreach (var x in checkouts)
-            //{
-            //    Debug.WriteLine(x);
-            //}
+                //}
+                //catch (Exception e)
+                //{
+                //    Debug.Write(e.StackTrace);
+                //    checkouts = new List<KeyValuePair<string, string>>();
+                //    string key;
+                //    string line;
+                //    string checkout;
+                //    const string NAME = "MobileApps2Project.checkouts.txt";
+                //    convertJSON = new List<CheckoutStrings>();
+
+                //    Assembly assembly = Assembly.GetExecutingAssembly();
+
+                //    using (Stream stream = assembly.GetManifestResourceStream(NAME))
+                //    {
+                //        StreamReader file = new StreamReader(stream);
+
+                //        while ((line = file.ReadLine()) != null)
+                //        {
+                //            key = line.Substring(0, 3);
+                //            key = Regex.Replace(key, @"[^0-9a-zA-Z]+", "");
+                //            checkout = line.Substring(3);
+                //            checkout = Regex.Replace(checkout, @"[^0-9a-zA-Z]+", " ");
+                //            checkout = checkout.Trim();
+
+                //            checkouts.Add(new KeyValuePair<string, string>(key, checkout));
+
+                //            CheckoutStrings c = new CheckoutStrings(key, checkout);
+                //            convertJSON.Add(c);
+                //            Debug.WriteLine("NON-JSON");
+                //        }
+                //    }
+                //}
+
+
+            });
+        }
+
+        //Method I used once to convert checkouts.txt to a json for a mongoDB
+        private void ConvertToJson()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+            string filename = Path.Combine(path, CONVERTED);
+
+            Debug.WriteLine(filename);
+
+            using (var w = new StreamWriter(filename, false))
+            {
+
+                foreach (var x in convertJSON)
+                {
+                    string json = JsonConvert.SerializeObject(x);
+                    w.WriteLine(json + ",");
+                }
+
+
+            }
         }
 
         private void Enter_Clicked(object sender, EventArgs e)
@@ -116,15 +154,32 @@ namespace MobileApps2Project
         {
             string checkout = "No checkout";
 
-            foreach (var x in checkouts)
+            try
             {
-                if (x.Key.Equals(score))
+                foreach (var x in checkoutList)
                 {
-                    checkout = x.Value;
-                    Debug.WriteLine(checkout);
-                    return checkout;
+                    if (x.score.Equals(score))
+                    {
+                        checkout = x.checkoutString;
+                        Debug.WriteLine(checkout);
+                        return checkout;
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+                foreach (var x in checkouts)
+                {
+                    if (x.Key.Equals(score))
+                    {
+                        checkout = x.Value;
+                        Debug.WriteLine(checkout);
+                        return checkout;
+                    }
+                }
+            }
+            
 
             return checkout;
         }

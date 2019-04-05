@@ -11,16 +11,21 @@
 
   <ItemGroup>
     <None Remove="checkouts.txt" />
+    <None Remove="converted.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="checkouts.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="converted.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
   </ItemGroup>
 

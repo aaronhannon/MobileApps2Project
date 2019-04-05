@@ -7,6 +7,7 @@
 
             <StackLayout Padding="0" Spacing="0" x:Name="toolbarStk">
                 <Label x:Name="bar"/>
+                <Label x:Name="state" HorizontalOptions="End" TextColor="Red" Text="Please Wait..."/>
             </StackLayout>
 
             <Grid x:Name="stats" Margin="-8" Padding="0" ColumnSpacing="0" RowSpacing="0" BackgroundColor="White">

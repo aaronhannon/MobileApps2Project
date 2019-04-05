@@ -9,9 +9,16 @@ namespace MobileApps2Project
 {
     public partial class MainPage : ContentPage
     {
+        public MatchPage mp;
+
         public MainPage()
         {
             InitializeComponent();
+
+            //TO BE Re-done
+            //MongoService ms = new MongoService();
+            //List<Checkout> checkouts = ms.GetAllData();
+
             NavigationPage.SetHasNavigationBar(this, false);
 
             toolbarStk.BackgroundColor = Color.FromHex("#3f7247");

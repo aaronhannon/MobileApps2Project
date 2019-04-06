@@ -30,7 +30,6 @@ namespace MobileApps2Project
 
                     var collectionSettings = new MongoCollectionSettings { ReadPreference = ReadPreference.Nearest };
                     mongoCollection = db.GetCollection<Checkout>(collectionName, collectionSettings);
-
                     
                 }
 

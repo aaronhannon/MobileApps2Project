@@ -15,10 +15,6 @@ namespace MobileApps2Project
         {
             InitializeComponent();
 
-            //TO BE Re-done
-            //MongoService ms = new MongoService();
-            //List<Checkout> checkouts = ms.GetAllData();
-
             NavigationPage.SetHasNavigationBar(this, false);
 
             toolbarStk.BackgroundColor = Color.FromHex("#3f7247");

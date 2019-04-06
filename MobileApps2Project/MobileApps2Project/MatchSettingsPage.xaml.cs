@@ -19,10 +19,29 @@ namespace MobileApps2Project
         Entry player1;
         Entry player2;
         Entry testStartScore;
+        List<Checkout> checkouts;
+
 
         public MatchSettingsPage()
         {
+
             InitializeComponent();
+
+            Task task1 = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    MongoService mongoservice = new MongoService();
+                    checkouts = mongoservice.GetAllData();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.StackTrace);
+                }
+                
+
+
+            });
 
             NavigationPage.SetHasNavigationBar(this, false);
 
@@ -120,7 +139,8 @@ namespace MobileApps2Project
         private async void StartBtn_Clicked(object sender, EventArgs e)
         {
             MatchSettings ms = new MatchSettings(player1.Text,player2.Text,testStartScore.Text);
-            await Navigation.PushAsync(new MatchPage(ms));
+
+            await Navigation.PushAsync(new MatchPage(ms, checkouts));
         }
     }
 }

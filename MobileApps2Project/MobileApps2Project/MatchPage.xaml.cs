@@ -25,7 +25,7 @@ namespace MobileApps2Project
         public int playerTurn = 1;
         public const string CONVERTED = "converted.txt";
 
-        List<KeyValuePair<string, string>> checkouts;
+        List<KeyValuePair<string, string>> checkoutKeyPair;
         List<Checkout> checkoutList;
         List<CheckoutStrings> convertJSON;
 
@@ -35,10 +35,11 @@ namespace MobileApps2Project
 
         }
 
-        public MatchPage(MatchSettings ms)
+        public MatchPage(MatchSettings ms,object cs)
         {
 
             InitializeComponent();
+            checkoutList = cs as List<Checkout>;
             matchSettings = ms;
             UISetup();
             SetupCheckouts();
@@ -50,50 +51,40 @@ namespace MobileApps2Project
 
             Task task1 = Task.Factory.StartNew(() =>
             {
-                //try
-                //{
-                    MongoService mg = new MongoService();
-                    checkoutList = mg.GetAllData();
-
-                
-                foreach (var c in checkoutList)
+                if (checkoutList == null)
                 {
-                    Debug.WriteLine("MATCHPAGE: " + c.score + ": " + c.checkoutString);
+                    
+                    checkoutKeyPair = new List<KeyValuePair<string, string>>();
+                    string key;
+                    string line;
+                    string checkout;
+                    const string NAME = "MobileApps2Project.checkouts.txt";
+                    convertJSON = new List<CheckoutStrings>();
+
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+
+                    using (Stream stream = assembly.GetManifestResourceStream(NAME))
+                    {
+                        StreamReader file = new StreamReader(stream);
+
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            key = line.Substring(0, 3);
+                            key = Regex.Replace(key, @"[^0-9a-zA-Z]+", "");
+                            checkout = line.Substring(3);
+                            checkout = Regex.Replace(checkout, @"[^0-9a-zA-Z]+", " ");
+                            checkout = checkout.Trim();
+
+                            checkoutKeyPair.Add(new KeyValuePair<string, string>(key, checkout));
+
+                            CheckoutStrings c = new CheckoutStrings(key, checkout);
+                            convertJSON.Add(c);
+                            Debug.WriteLine("NON-JSON");
+                        }
+                    }
                 }
 
-                //}
-                //catch (Exception e)
-                //{
-                //    Debug.Write(e.StackTrace);
-                //    checkouts = new List<KeyValuePair<string, string>>();
-                //    string key;
-                //    string line;
-                //    string checkout;
-                //    const string NAME = "MobileApps2Project.checkouts.txt";
-                //    convertJSON = new List<CheckoutStrings>();
 
-                //    Assembly assembly = Assembly.GetExecutingAssembly();
-
-                //    using (Stream stream = assembly.GetManifestResourceStream(NAME))
-                //    {
-                //        StreamReader file = new StreamReader(stream);
-
-                //        while ((line = file.ReadLine()) != null)
-                //        {
-                //            key = line.Substring(0, 3);
-                //            key = Regex.Replace(key, @"[^0-9a-zA-Z]+", "");
-                //            checkout = line.Substring(3);
-                //            checkout = Regex.Replace(checkout, @"[^0-9a-zA-Z]+", " ");
-                //            checkout = checkout.Trim();
-
-                //            checkouts.Add(new KeyValuePair<string, string>(key, checkout));
-
-                //            CheckoutStrings c = new CheckoutStrings(key, checkout);
-                //            convertJSON.Add(c);
-                //            Debug.WriteLine("NON-JSON");
-                //        }
-                //    }
-                //}
 
 
             });
@@ -169,7 +160,7 @@ namespace MobileApps2Project
             catch (Exception)
             {
 
-                foreach (var x in checkouts)
+                foreach (var x in checkoutKeyPair)
                 {
                     if (x.Key.Equals(score))
                     {

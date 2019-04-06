@@ -118,25 +118,60 @@ namespace MobileApps2Project
 
             if (playerTurn == 1)
             {
+                if (Convert.ToInt32(score.Text) <= 180)
+                {
+                    if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) > 0)
+                    {
+                        p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
 
-                p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
-                l1.Text = p1Score.ToString();
-                checkout = searchCheckouts(l1.Text);
-                check1.Text = checkout;
-                score.Text = "";
-                playerTurn = 2;
+                    }
+                    else if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) == 0)
+                    {
+                        p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
+                        DisplayAlert("Winner", "Player 1 Wins", "OK");
+                        Navigation.PopAsync();
 
-                
+                    }
+
+                    l1.Text = p1Score.ToString();
+                    checkout = searchCheckouts(l1.Text);
+                    check1.Text = checkout;
+                    score.Text = "";
+                    playerTurn = 2;
+                }
+                else
+                {
+                    DisplayAlert("ERROR", "Max Score is 180", "OK");
+                }
 
             }
             else
             {
-                p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
-                l2.Text = p2Score.ToString();
-                checkout = searchCheckouts(l2.Text);
-                check2.Text = checkout;
-                score.Text = "";
-                playerTurn = 1;
+                if (Convert.ToInt32(score.Text) <= 180)
+                {
+                    if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) > 0)
+                    {
+                        p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
+
+                    }
+                    else if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) == 0)
+                    {
+                        p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
+                        DisplayAlert("Winner", "Player 1 Wins", "OK");
+                        Navigation.PopAsync();
+                    }
+
+                    l2.Text = p2Score.ToString();
+                    checkout = searchCheckouts(l2.Text);
+                    check2.Text = checkout;
+                    score.Text = "";
+                    playerTurn = 1;
+                }
+                else
+                {
+                    DisplayAlert("ERROR", "Max Score is 180", "OK");
+                }
+                
             }
 
         }
@@ -178,7 +213,6 @@ namespace MobileApps2Project
         private void BtnAdd_Clicked(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            //if(score.Text.Length < 4)
             score.Text += btn.StyleId;
         }
 
@@ -222,7 +256,7 @@ namespace MobileApps2Project
             score = new Entry()
             {
                 Placeholder = "SCORE",
-                WidthRequest = 150,
+                WidthRequest = 200,
                 HeightRequest = 35,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
@@ -233,8 +267,10 @@ namespace MobileApps2Project
 
             Button enter = new Button()
             {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                HeightRequest = 50,
+                WidthRequest = 75,
                 BackgroundColor = Color.Blue,
                 StyleId = "0",
                 Text = "Enter",

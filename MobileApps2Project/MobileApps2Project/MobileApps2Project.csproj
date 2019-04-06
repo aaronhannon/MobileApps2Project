@@ -30,10 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="MatchPage.xaml">
+    <EmbeddedResource Update="Pages\MatchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="MatchSettingsPage.xaml">
+    <EmbeddedResource Update="Pages\MatchSettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -27,7 +27,7 @@ namespace MobileApps2Project
 
             InitializeComponent();
 
-            Task task1 = Task.Factory.StartNew(() =>
+            Task getMongoData = Task.Factory.StartNew(() =>
             {
                 try
                 {
@@ -38,8 +38,7 @@ namespace MobileApps2Project
                 {
                     Debug.WriteLine(e.StackTrace);
                 }
-                
-
+              
 
             });
 
@@ -138,9 +137,16 @@ namespace MobileApps2Project
 
         private async void StartBtn_Clicked(object sender, EventArgs e)
         {
-            MatchSettings ms = new MatchSettings(player1.Text,player2.Text,testStartScore.Text);
+            if (testStartScore.Text == "301" || testStartScore.Text == "501" || testStartScore.Text == "701")
+            {
+                MatchSettings ms = new MatchSettings(player1.Text, player2.Text, testStartScore.Text);
+                await Navigation.PushAsync(new MatchPage(ms, checkouts));
 
-            await Navigation.PushAsync(new MatchPage(ms, checkouts));
+            }
+            else
+            {
+                DisplayAlert("ERROR", "Please enter 301,501 or 701", "OK");
+            }
         }
     }
 }

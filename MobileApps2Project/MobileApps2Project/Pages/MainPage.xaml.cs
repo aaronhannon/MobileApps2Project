@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileApps2Project.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,13 +32,31 @@ namespace MobileApps2Project
             newGameBtn.Text = "Start new Game";
             newGameBtn.HeightRequest = 50;
             newGameBtn.BackgroundColor = Color.FromHex("#e2e2e2");
-            
+
+            statsBtn.Text = "View Stats";
+            statsBtn.HeightRequest = 50;
+            statsBtn.BackgroundColor = Color.FromHex("#e2e2e2");
+
+
+            //getMongoData();
+
+        }
+
+        public void getMongoData()
+        {
+            MongoService ms = new MongoService();
+            var x = ms.GetAllStats();
         }
 
         private async void NewGameBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MatchSettingsPage());
 
+        }
+
+        private async void StatsBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Stats());
         }
     }
 }

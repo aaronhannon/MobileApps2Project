@@ -19,6 +19,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Button x:Name="newGameBtn" Clicked="NewGameBtn_Clicked" Grid.Row="0"/>
+                <Button x:Name="statsBtn" Clicked="StatsBtn_Clicked" Grid.Row="1"/>
 
             </Grid>
 

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MobileApps2Project.Classes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -128,7 +129,14 @@ namespace MobileApps2Project
                     else if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) == 0)
                     {
                         p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
-                        DisplayAlert("Winner", "Player 1 Wins", "OK");
+                        DisplayAlert("Winner", matchSettings.p1Name + " Wins", "OK");
+
+                        GameStats gs = new GameStats(matchSettings.p1Name, matchSettings.p2Name, "5", "6", matchSettings.p1Name);
+
+                        writeStats(gs);
+                        MongoService ms = new MongoService();
+                       var x = ms.GetAllStats();
+
                         Navigation.PopAsync();
 
                     }
@@ -157,7 +165,11 @@ namespace MobileApps2Project
                     else if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) == 0)
                     {
                         p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
-                        DisplayAlert("Winner", "Player 1 Wins", "OK");
+                        DisplayAlert("Winner", matchSettings.p2Name + " Wins", "OK");
+
+                        GameStats gs = new GameStats(matchSettings.p1Name, matchSettings.p2Name, "5", "6",matchSettings.p2Name);
+
+                        writeStats(gs);
                         Navigation.PopAsync();
                     }
 
@@ -173,6 +185,26 @@ namespace MobileApps2Project
                 }
                 
             }
+
+        }
+
+        private void writeStats(GameStats g)
+        {
+            Task setMongoData = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    MongoService mongoService = new MongoService();
+                    mongoService.saveStatsData(g);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.StackTrace);
+                }
+
+
+            });
+
 
         }
 

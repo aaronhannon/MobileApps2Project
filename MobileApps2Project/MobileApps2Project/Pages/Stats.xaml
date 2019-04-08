@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApps2Project.Pages.Stats">
+    <ContentPage.Content>
+        <ListView x:Name="StatsView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="Player 1 Name : {Binding player1Name}" />
+                            <Label Text="{Binding player1Sets}" />
+                            <Label Text="{Binding player2Name}" />
+                            <Label Text="{Binding player2Sets}" />
+                            <Label Text="{Binding winner}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

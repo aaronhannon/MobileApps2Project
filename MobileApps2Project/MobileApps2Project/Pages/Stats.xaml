@@ -7,18 +7,60 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding player1Name}" />
-                            <Label Text="{Binding player1Sets}" />
-                            <Label Text="{Binding player1Legs}" />
-                            <Label Text="{Binding player1Average}" />
-                            <Label Text="{Binding player1Darts}" />
-                            <Label Text="{Binding player2Name}" />
-                            <Label Text="{Binding player2Sets}" />
-                            <Label Text="{Binding player2Legs}" />
-                            <Label Text="{Binding player2Average}" />
-                            <Label Text="{Binding player2Darts}" />
-                            <Label Text="{Binding winner}" />
+                        <StackLayout Padding="10" Margin="10" BackgroundColor="Orange">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" FontAttributes="Bold" FontSize="20" Text="Player 1" />
+                                <Label Grid.Row="0" Grid.Column="2" FontAttributes="Bold" FontSize="20" Text="Player 2" />
+
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding player1Name}" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding player1Sets}" />
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding player1Legs}" />
+                                <Label Grid.Row="4" Grid.Column="1" Text="{Binding player1Average}" />
+                                <Label Grid.Row="5" Grid.Column="1" Text="{Binding player1Darts}" />
+
+                                <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Text="Name:" />
+                                <Label Grid.Row="2" Grid.Column="0" FontAttributes="Bold" Text="Sets Won:" />
+                                <Label Grid.Row="3" Grid.Column="0" FontAttributes="Bold" Text="Legs Won:" />
+                                <Label Grid.Row="4" Grid.Column="0" FontAttributes="Bold" Text="Average Score:" />
+                                <Label Grid.Row="5" Grid.Column="0" FontAttributes="Bold" Text="Darts Thrown:" />
+
+                                <Label Grid.Row="1" Grid.Column="3" Text="{Binding player2Name}" />
+                                <Label Grid.Row="2" Grid.Column="3" Text="{Binding player2Sets}" />
+                                <Label Grid.Row="3" Grid.Column="3" Text="{Binding player2Legs}" />
+                                <Label Grid.Row="4" Grid.Column="3" Text="{Binding player2Average}" />
+                                <Label Grid.Row="5" Grid.Column="3" Text="{Binding player2Darts}" />
+
+                                <Label Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Text="Name:" />
+                                <Label Grid.Row="2" Grid.Column="2" FontAttributes="Bold" Text="Sets Won:" />
+                                <Label Grid.Row="3" Grid.Column="2" FontAttributes="Bold" Text="Legs Won:" />
+                                <Label Grid.Row="4" Grid.Column="2" FontAttributes="Bold" Text="Average Score:" />
+                                <Label Grid.Row="5" Grid.Column="2" FontAttributes="Bold" Text="Darts Thrown:" />
+
+                                <Label Grid.Row="6" Grid.Column="1" FontAttributes="Bold" FontSize="20" Text="Winner:" />
+                                <Label Grid.Row="6" Grid.Column="2" FontAttributes="Bold" FontSize="20" Text="{Binding winner}" />
+                            </Grid>
+                            
+
+                            
+
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

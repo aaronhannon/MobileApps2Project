@@ -18,6 +18,7 @@ namespace MobileApps2Project
     {
         Entry player1;
         Entry player2;
+        Entry setNumber;
         Entry testStartScore;
         List<Checkout> checkouts;
 
@@ -77,7 +78,16 @@ namespace MobileApps2Project
 
             Label l3 = new Label()
             {
-                Text = "Enter Start Score: ",
+                Text = "Start Score: ",
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Center,
+                FontSize = 15,
+                FontAttributes = FontAttributes.Bold
+            };
+
+            Label l4 = new Label()
+            {
+                Text = "Number of Sets: ",
                 HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Center,
                 FontSize = 15,
@@ -111,6 +121,15 @@ namespace MobileApps2Project
                 VerticalOptions = LayoutOptions.Center
             };
 
+            setNumber = new Entry()
+            {
+                Placeholder = "(3 legs in a set)",
+                WidthRequest = 200,
+                HeightRequest = 35,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center
+            };
+
             Button startBtn = new Button()
             {
                 Text = "Start new Game",
@@ -124,10 +143,12 @@ namespace MobileApps2Project
             settingsGrd.Children.Add(l1, 0, 0);
             settingsGrd.Children.Add(l2, 0, 1);
             settingsGrd.Children.Add(l3, 0, 2);
+            settingsGrd.Children.Add(l4, 0, 3);
             settingsGrd.Children.Add(player1, 0, 0);
             settingsGrd.Children.Add(player2, 0, 1);
             settingsGrd.Children.Add(testStartScore, 0, 2);
-            settingsGrd.Children.Add(startBtn, 0, 3);
+            settingsGrd.Children.Add(setNumber, 0, 3);
+            settingsGrd.Children.Add(startBtn, 0, 4);
 
 
 
@@ -139,7 +160,7 @@ namespace MobileApps2Project
         {
             if (testStartScore.Text == "301" || testStartScore.Text == "501" || testStartScore.Text == "701")
             {
-                MatchSettings ms = new MatchSettings(player1.Text, player2.Text, testStartScore.Text);
+                MatchSettings ms = new MatchSettings(player1.Text, player2.Text, testStartScore.Text,setNumber.Text);
                 await Navigation.PushAsync(new MatchPage(ms, checkouts));
 
             }

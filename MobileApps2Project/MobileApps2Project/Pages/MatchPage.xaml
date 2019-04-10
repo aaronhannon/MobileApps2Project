@@ -16,18 +16,33 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Grid ColumnSpacing="0" RowSpacing="0" Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <Label x:Name="l1" HorizontalOptions="Center" VerticalOptions="Center" Text="TEST1" Grid.Column="0"/>
-                    <Label Margin="20" x:Name="check1" HorizontalOptions="Center" VerticalOptions="End" Text="TEST1" Grid.Column="0"/>
-                    <Label x:Name="l2" HorizontalOptions="Center" VerticalOptions="Center" Text="TEST2" Grid.Column="1"/>
-                    <Label Margin="20" x:Name="check2" HorizontalOptions="Center" VerticalOptions="End" Text="TEST2" Grid.Column="1"/>
+                <StackLayout Grid.Row="0">
+                    <Grid Padding="0" ColumnSpacing="0" RowSpacing="0" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                </Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="p1" HorizontalOptions="Center" VerticalOptions="End" Grid.Row="0" FontAttributes="Bold" Text="Aaron | Sets: 1 Legs: 2" Grid.Column="0"/>
+                        <Label x:Name="l1" HorizontalOptions="Center" Grid.Row="1" Text="" Grid.Column="0"/>
+                        <Label x:Name="check1" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="2" FontAttributes="Bold" TextColor="Red" Text="" Grid.Column="0"/>
+                        <Label x:Name="stats1" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="3" FontAttributes="Bold" TextColor="Green" Text="AVG: 0.00 | Last Score: 0" Grid.Column="0"/>
+
+                        <Label x:Name="p2" HorizontalOptions="Center" VerticalOptions="End" Grid.Row="0" FontAttributes="Bold" Text="Hannon | Sets: 1 Legs: 2" Grid.Column="1"/>
+                        <Label x:Name="l2" HorizontalOptions="Center" Grid.Row="1" Text="TEST2" Grid.Column="1"/>
+                        <Label x:Name="check2" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="2" FontAttributes="Bold" TextColor="Red" Text="" Grid.Column="1"/>
+                        <Label x:Name="stats2" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="3" FontAttributes="Bold" TextColor="Green" Text="AVG: 0.00 | Last Score: 0" Grid.Column="1"/>
+
+                    </Grid>
+                </StackLayout>
+
 
                 <Grid Grid.Row="1" ColumnSpacing="0" Margin="-8" x:Name="buttons"  BackgroundColor="LightSlateGray">
                     <Grid.ColumnDefinitions>

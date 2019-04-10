@@ -96,7 +96,8 @@ namespace MobileApps2Project
 
             foreach (var x in allData)
             {
-                stats.Add(new GameStats(x.player1Name, x.player2Name, x.player1Sets, x.player2Sets,x.winner));
+                stats.Add(new GameStats(x.player1Name, x.player2Name, x.player1Sets, x.player1Legs, x.player2Sets, x.player2Legs, x.player1Average, x.player2Average
+                    , x.player1Darts, x.player2Darts, x.winner));
                 Debug.WriteLine(x.player1Name + " " + x.player2Name + " " + x.player1Sets + " " + x.player2Sets + " " + x.winner);
             }
 

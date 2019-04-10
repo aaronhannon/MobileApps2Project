@@ -8,10 +8,16 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <Label Text="Player 1 Name : {Binding player1Name}" />
+                            <Label Text="{Binding player1Name}" />
                             <Label Text="{Binding player1Sets}" />
+                            <Label Text="{Binding player1Legs}" />
+                            <Label Text="{Binding player1Average}" />
+                            <Label Text="{Binding player1Darts}" />
                             <Label Text="{Binding player2Name}" />
                             <Label Text="{Binding player2Sets}" />
+                            <Label Text="{Binding player2Legs}" />
+                            <Label Text="{Binding player2Average}" />
+                            <Label Text="{Binding player2Darts}" />
                             <Label Text="{Binding winner}" />
                         </StackLayout>
                     </ViewCell>

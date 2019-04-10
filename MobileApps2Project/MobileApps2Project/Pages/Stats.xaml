@@ -6,7 +6,7 @@
     <ContentPage.Resources>
         <DataTemplate x:Key="statsList">
             <ViewCell>
-                <StackLayout Padding="10" Margin="10" BackgroundColor="Orange">
+                <StackLayout  Padding="10" Margin="10" BackgroundColor="Orange">
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -17,13 +17,13 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" FontAttributes="Bold" FontSize="20" Text="Player 1:" />

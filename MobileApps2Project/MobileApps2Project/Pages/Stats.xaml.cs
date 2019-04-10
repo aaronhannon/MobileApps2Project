@@ -34,7 +34,7 @@ namespace MobileApps2Project.Pages
             bar.FontAttributes = FontAttributes.Bold;
 
 
-            getMongoData();
+            //getMongoData();
         }
 
         public void getMongoData()

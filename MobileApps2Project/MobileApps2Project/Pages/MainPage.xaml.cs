@@ -11,10 +11,13 @@ namespace MobileApps2Project
     public partial class MainPage : ContentPage
     {
         public MatchPage mp;
+        Stats stats;
 
         public MainPage()
         {
             InitializeComponent();
+            stats = new Stats();
+            stats.getMongoData();
 
             NavigationPage.SetHasNavigationBar(this, false);
 
@@ -56,7 +59,7 @@ namespace MobileApps2Project
 
         private async void StatsBtn_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Stats());
+            await Navigation.PushAsync(stats);
         }
     }
 }

@@ -29,11 +29,11 @@ namespace MobileApps2Project
             bar.FontSize = 18;
             bar.FontAttributes = FontAttributes.Bold;
 
-            newGameBtn.Text = "Start new Game";
+            newGameBtn.Text = "Create New Game";
             newGameBtn.HeightRequest = 50;
             newGameBtn.BackgroundColor = Color.FromHex("#e2e2e2");
 
-            statsBtn.Text = "View Stats";
+            statsBtn.Text = "View Game Statistics";
             statsBtn.HeightRequest = 50;
             statsBtn.BackgroundColor = Color.FromHex("#e2e2e2");
 

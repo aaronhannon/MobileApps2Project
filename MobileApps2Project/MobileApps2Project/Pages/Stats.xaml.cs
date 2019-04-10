@@ -19,7 +19,21 @@ namespace MobileApps2Project.Pages
         public Stats ()
 		{
 			InitializeComponent ();
-            
+
+            NavigationPage.SetHasNavigationBar(this, false);
+
+            toolbarStk.BackgroundColor = Color.FromHex("#3f7247");
+            toolbarStk.HeightRequest = 55;
+            toolbarStk.HorizontalOptions = LayoutOptions.FillAndExpand;
+
+            bar.Text = "Game Statistics";
+            bar.HorizontalTextAlignment = TextAlignment.Start;
+            bar.Margin = 15;
+            bar.TextColor = Color.White;
+            bar.FontSize = 18;
+            bar.FontAttributes = FontAttributes.Bold;
+
+
             getMongoData();
         }
 

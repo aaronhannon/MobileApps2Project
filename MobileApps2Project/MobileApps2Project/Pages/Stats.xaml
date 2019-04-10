@@ -6,7 +6,7 @@
     <ContentPage.Resources>
         <DataTemplate x:Key="statsList">
             <ViewCell>
-                <StackLayout  Padding="10" Margin="10" BackgroundColor="Orange">
+                <StackLayout x:Name="statStk"  Padding="10" Margin="10">
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -63,11 +63,14 @@
 
     <ContentPage.Content>
         <StackLayout>
+
             <StackLayout x:Name="toolbarStk">
                 <Label x:Name="bar"/>
+                <Button x:Name="refresh" HorizontalOptions="Center" WidthRequest="300" Text="Refresh List" Clicked="Button_Clicked"/>
+
             </StackLayout>
 
-            <ListView x:Name="StatsView" ItemTemplate="{StaticResource statsList}" />
+            <ListView Margin="0,50,0,0" x:Name="StatsView" HasUnevenRows="True" ItemTemplate="{StaticResource statsList}" />
         </StackLayout>
 
     </ContentPage.Content>

@@ -59,6 +59,7 @@ namespace MobileApps2Project
 
         }
 
+        //Updates UI elements at the end of every leg
         private void UpdateUI()
         {
             if(playerTurn == 1)
@@ -81,7 +82,7 @@ namespace MobileApps2Project
 
         public void SetupCheckouts()
         {
-
+            //Task factory used to retrieve data in the background from backup file if there is no internet connection
             Task task1 = Task.Factory.StartNew(() =>
             {
                 if (checkoutList == null)
@@ -99,6 +100,7 @@ namespace MobileApps2Project
                     using (Stream stream = assembly.GetManifestResourceStream(NAME))
                     {
                         StreamReader file = new StreamReader(stream);
+                        Debug.WriteLine(file);
 
                         while ((line = file.ReadLine()) != null)
                         {
@@ -145,15 +147,18 @@ namespace MobileApps2Project
             }
         }
 
+
+        //Game logic
         private void Enter_Clicked(object sender, EventArgs e)
         {
             string checkout;
             
 
-            if (playerTurn == 1)
-            {
+             if (playerTurn == 1)
+             {
                 try
                 {
+                    //Cannot score more than 180
                     if (Convert.ToInt32(score.Text) <= 180)
                     {
                         player1.dartNumber += 3;
@@ -162,11 +167,14 @@ namespace MobileApps2Project
                         p1Total += Convert.ToInt32(score.Text);
                         player1.average = p1Total / p1Turns;
 
+                        //Minus from players score
                         if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) > 0)
                         {
                             p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
+                            player1.lastScore = Convert.ToInt32(score.Text);
 
                         }
+                        //Player wins leg and all data is reset
                         else if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) == 0)
                         {
 
@@ -187,6 +195,7 @@ namespace MobileApps2Project
 
                             }
 
+                            //Player wins, stats are written to mongo and you are returned to the previous page
                             if (player1.setsWon.ToString() == matchSettings.setNumber)
                             {
                                 p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
@@ -225,6 +234,7 @@ namespace MobileApps2Project
             {
                 try
                 {
+                    //Can not score more than 180
                     if (Convert.ToInt32(score.Text) <= 180)
                     {
                         player2.dartNumber += 3;
@@ -233,11 +243,13 @@ namespace MobileApps2Project
                         p2Total += Convert.ToInt32(score.Text);
                         player2.average = p2Total / p2Turns;
 
+                        //Minus from players score
                         if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) > 0)
                         {
                             p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
                             player2.lastScore = Convert.ToInt32(score.Text);
                         }
+                        //Player wins leg and all data is reset
                         else if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) == 0)
                         {
                             player2.legsWon++;
@@ -256,6 +268,7 @@ namespace MobileApps2Project
 
                             }
 
+                            //Player wins, stats are written to mongo and you are returned to the previous page
                             if (player2.setsWon.ToString() == matchSettings.setNumber)
                             {
                                 p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
@@ -293,6 +306,7 @@ namespace MobileApps2Project
 
         }
 
+        //At the end of a game all the stats are written to the mongo database
         private void writeStats(GameStats g)
         {
             Task setMongoData = Task.Factory.StartNew(() =>
@@ -313,6 +327,8 @@ namespace MobileApps2Project
 
         }
 
+        //Searches through checkout list for a checkout string with a score, if checkoutlist == null 
+        //then it uses a checkoutkeyvalue which gets its data from a backup file
         private string searchCheckouts(string score)
         {
             string checkout = "No checkout";
@@ -347,12 +363,14 @@ namespace MobileApps2Project
             return checkout;
         }
 
+        //Adds a character to the score string
         private void BtnAdd_Clicked(object sender, EventArgs e)
         {
             Button btn = sender as Button;
             score.Text += btn.StyleId;
         }
 
+        //Removes a character from the score string
         private void BtnRemove_Clicked(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -364,7 +382,7 @@ namespace MobileApps2Project
             score.Text = s;
         }
 
-
+        //Setting up the UI for the page
         private void UISetup()
         {
 
@@ -380,8 +398,6 @@ namespace MobileApps2Project
             bar.TextColor = Color.White;
             bar.FontSize = 18;
             bar.FontAttributes = FontAttributes.Bold;
-
-            //textSettings.Text = matchSettings.p1Name + "askdlfhalskdjfh";
 
             l1.Text = matchSettings.startScore;
             l1.FontSize = 30;

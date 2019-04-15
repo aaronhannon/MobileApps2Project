@@ -5,6 +5,7 @@ using System.Text;
 
 namespace MobileApps2Project.Classes
 {
+    //At the end of a match this object is written to the mongo database
     class GameStats
     {
         public ObjectId Id { get; set; }

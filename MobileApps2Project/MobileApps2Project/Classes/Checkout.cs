@@ -4,6 +4,7 @@ using System.Text;
 
 namespace MobileApps2Project
 {
+    //Object used to store score and checkout connected to it
     class Checkout
     {
         public object id { get; set; }
@@ -15,8 +16,6 @@ namespace MobileApps2Project
         {
             id = i;
             checkouts = s;
-            //score = s;
-            //checkoutString = c;
         }
 
         public Checkout(string s, string c)

@@ -12,6 +12,7 @@ namespace MobileApps2Project
 {
     class MongoService
     {
+        //Connecting to the Checkouts Collection
         public List<Checkout> checkouts;
         public List<GameStats> stats;
         public string dbName = "mongo_database";
@@ -41,6 +42,7 @@ namespace MobileApps2Project
 
         }
 
+        //Connecting to the stats collection
         public IMongoCollection<GameStats> statsCollection;
         public IMongoCollection<GameStats> StatsCollection
         {
@@ -65,6 +67,7 @@ namespace MobileApps2Project
 
         }
 
+        //Retrieve a list of all the checkout data
         public List<Checkout> GetAllData()
         {
             checkouts = new List<Checkout>();
@@ -82,6 +85,7 @@ namespace MobileApps2Project
             return checkouts;
         }
 
+        //Write to the stats collection
         public async void saveStatsData(GameStats g)
         {
            await StatsCollection.InsertOneAsync(g);
@@ -89,6 +93,7 @@ namespace MobileApps2Project
             
         }
 
+        //Get a list of all the gamestats on the server
         public List<GameStats> GetAllStats()
         {
             stats = new List<GameStats>();

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace MobileApps2Project.Classes
 {
+    //Player Object to be stored on a mongoDb
     class Player
     {
         public string name { get; set; }

@@ -13,11 +13,22 @@ namespace MobileApps2Project
         public MatchPage mp;
         Stats stats;
 
+        //Setting up the page
         public MainPage()
         {
             InitializeComponent();
-            stats = new Stats();
-            stats.getMongoData();
+            //Downloads Game Stats before going to that page
+            try
+            {
+                stats = new Stats();
+                stats.getMongoData();
+            }
+            catch (Exception)
+            {
+
+                DisplayAlert("ERROR", "Network Connection Required To View Stats", "OK");
+            }
+
 
             NavigationPage.SetHasNavigationBar(this, false);
 
@@ -40,23 +51,23 @@ namespace MobileApps2Project
             statsBtn.HeightRequest = 50;
             statsBtn.BackgroundColor = Color.FromHex("#e2e2e2");
 
-
-            //getMongoData();
-
         }
 
+        //Gets Game Stats from Mongo
         public void getMongoData()
         {
             MongoService ms = new MongoService();
             var x = ms.GetAllStats();
         }
 
+        //Navigates to the match settings page
         private async void NewGameBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MatchSettingsPage());
 
         }
 
+        //Navigates to the Gamestats page
         private async void StatsBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(stats);

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace MobileApps2Project
 {
+    //Match settings object used to set up the match page
     public class MatchSettings
     {
         public string p1Name;

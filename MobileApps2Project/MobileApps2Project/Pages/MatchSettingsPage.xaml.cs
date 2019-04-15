@@ -22,12 +22,13 @@ namespace MobileApps2Project
         Entry testStartScore;
         List<Checkout> checkouts;
 
-
+        //Sets up Match Setting UI
         public MatchSettingsPage()
         {
 
             InitializeComponent();
 
+            //Gets checkout list before it is needed in the matchpage so the user can use the calculator as soon as they hit start match
             Task getMongoData = Task.Factory.StartNew(() =>
             {
                 try
@@ -155,7 +156,7 @@ namespace MobileApps2Project
         }
 
 
-
+        //Pushed to the match page if all the entry boxes are filled
         private async void StartBtn_Clicked(object sender, EventArgs e)
         {
             if ((testStartScore.Text == "301" || testStartScore.Text == "501" || testStartScore.Text == "701")

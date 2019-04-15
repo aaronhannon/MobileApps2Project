@@ -16,6 +16,7 @@ namespace MobileApps2Project.Pages
 	{
         ObservableCollection<GameStats> gameStats;
 
+        //Sets up UI for stats page
         public Stats ()
 		{
 			InitializeComponent ();
@@ -36,21 +37,32 @@ namespace MobileApps2Project.Pages
  
         }
 
+        //Refreshes the list
         public void getMongoData()
         {
-            gameStats = new ObservableCollection<GameStats>();
-            MongoService ms = new MongoService();
-            List<GameStats> listdata = ms.GetAllStats();
-
-            foreach (var c in listdata)
+            try
             {
-                gameStats.Add(c);
+                gameStats = new ObservableCollection<GameStats>();
+                MongoService ms = new MongoService();
+                List<GameStats> listdata = ms.GetAllStats();
+
+                foreach (var c in listdata)
+                {
+                    gameStats.Add(c);
+                }
+
+                StatsView.ItemsSource = gameStats;
+            }
+            catch (Exception)
+            {
+
+                DisplayAlert("ERROR", "Network Connection Required To View Stats", "OK");
             }
 
-            StatsView.ItemsSource = gameStats;  
 
         }
 
+        //Refresh button
         private void Button_Clicked(object sender, EventArgs e)
         {
             getMongoData();

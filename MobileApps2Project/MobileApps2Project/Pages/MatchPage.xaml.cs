@@ -152,125 +152,142 @@ namespace MobileApps2Project
 
             if (playerTurn == 1)
             {
-                if (Convert.ToInt32(score.Text) <= 180)
+                try
                 {
-                    player1.dartNumber += 3;
-                    p1Turns++;
-                    player1.lastScore = Convert.ToInt32(score.Text);
-                    p1Total += Convert.ToInt32(score.Text);
-                    player1.average = p1Total / p1Turns;
-
-                    if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) > 0)
+                    if (Convert.ToInt32(score.Text) <= 180)
                     {
-                        p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
-                        
-                    }
-                    else if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) == 0)
-                    {
+                        player1.dartNumber += 3;
+                        p1Turns++;
+                        player1.lastScore = Convert.ToInt32(score.Text);
+                        p1Total += Convert.ToInt32(score.Text);
+                        player1.average = p1Total / p1Turns;
 
-                        player1.legsWon++;
-                        p1Score = Convert.ToInt32(matchSettings.startScore);
-                        p2Score = Convert.ToInt32(matchSettings.startScore);
-
-
-                        l1.Text = p1Score.ToString();
-                        l2.Text = p2Score.ToString();
-                        check1.Text = "No Checkout";
-                        check2.Text = "No Checkout";
-
-                        if (player1.legsWon == 3)
-                        {
-                            player1.legsWon = 0;
-                            player1.setsWon++;
-
-                        }
-
-                        if (player1.setsWon.ToString() == matchSettings.setNumber)
+                        if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) > 0)
                         {
                             p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
-                            DisplayAlert("Winner", matchSettings.p1Name + " Wins", "OK");
 
-                            GameStats gs = new GameStats(matchSettings.p1Name, matchSettings.p2Name, player1.setsWon.ToString(), player1.legsWon.ToString(), player2.setsWon.ToString(), player2.legsWon.ToString()
-                                , player1.average.ToString(), player2.average.ToString(), player1.dartNumber.ToString(), player2.dartNumber.ToString(), matchSettings.p1Name);
-                  
-                            writeStats(gs);
-                            Navigation.PopAsync();
+                        }
+                        else if ((Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text)) == 0)
+                        {
+
+                            player1.legsWon++;
+                            p1Score = Convert.ToInt32(matchSettings.startScore);
+                            p2Score = Convert.ToInt32(matchSettings.startScore);
+
+
+                            l1.Text = p1Score.ToString();
+                            l2.Text = p2Score.ToString();
+                            check1.Text = "No Checkout";
+                            check2.Text = "No Checkout";
+
+                            if (player1.legsWon == 3)
+                            {
+                                player1.legsWon = 0;
+                                player1.setsWon++;
+
+                            }
+
+                            if (player1.setsWon.ToString() == matchSettings.setNumber)
+                            {
+                                p1Score = Convert.ToInt32(l1.Text) - Convert.ToInt32(score.Text);
+                                DisplayAlert("Winner", matchSettings.p1Name + " Wins", "OK");
+
+                                GameStats gs = new GameStats(matchSettings.p1Name, matchSettings.p2Name, player1.setsWon.ToString(), player1.legsWon.ToString(), player2.setsWon.ToString(), player2.legsWon.ToString()
+                                    , player1.average.ToString(), player2.average.ToString(), player1.dartNumber.ToString(), player2.dartNumber.ToString(), matchSettings.p1Name);
+
+                                writeStats(gs);
+                                Navigation.PopAsync();
+                            }
+
                         }
 
+                        l1.Text = p1Score.ToString();
+                        checkout = searchCheckouts(l1.Text);
+                        check1.Text = checkout;
+                        score.Text = "";
+                        playerTurn = 2;
+                        UpdateUI();
                     }
-
-                    l1.Text = p1Score.ToString();
-                    checkout = searchCheckouts(l1.Text);
-                    check1.Text = checkout;
-                    score.Text = "";
-                    playerTurn = 2;
-                    UpdateUI();
+                    else
+                    {
+                        DisplayAlert("ERROR", "Entered value greater than 180", "OK");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    DisplayAlert("ERROR", "Entered value greater than 180", "OK");
+
+                    DisplayAlert("ERROR", "Please Enter a Number", "OK");
                 }
+                
 
             }
             else
             {
-                
-                if (Convert.ToInt32(score.Text) <= 180)
+                try
                 {
-                    player2.dartNumber += 3;
-                    p2Turns++;
-                    player2.lastScore = Convert.ToInt32(score.Text);
-                    p2Total += Convert.ToInt32(score.Text);
-                    player2.average = p2Total / p2Turns;
-
-                    if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) > 0)
+                    if (Convert.ToInt32(score.Text) <= 180)
                     {
-                        p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
+                        player2.dartNumber += 3;
+                        p2Turns++;
                         player2.lastScore = Convert.ToInt32(score.Text);
-                    }
-                    else if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) == 0)
-                    {
-                        player2.legsWon++;
-                        p1Score = Convert.ToInt32(matchSettings.startScore);
-                        p2Score = Convert.ToInt32(matchSettings.startScore);
+                        p2Total += Convert.ToInt32(score.Text);
+                        player2.average = p2Total / p2Turns;
 
-                        l1.Text = p1Score.ToString();
-                        l2.Text = p2Score.ToString();
-                        check1.Text = "No Checkout";
-                        check2.Text = "No Checkout";
-
-                        if (player2.legsWon == 3)
-                        {
-                            player2.legsWon = 0;
-                            player2.setsWon++;
-                            
-                        }
-
-                        if (player2.setsWon.ToString() == matchSettings.setNumber)
+                        if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) > 0)
                         {
                             p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
-                            DisplayAlert("Winner", matchSettings.p2Name + " Wins", "OK");
+                            player2.lastScore = Convert.ToInt32(score.Text);
+                        }
+                        else if ((Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text)) == 0)
+                        {
+                            player2.legsWon++;
+                            p1Score = Convert.ToInt32(matchSettings.startScore);
+                            p2Score = Convert.ToInt32(matchSettings.startScore);
 
-                            GameStats gs1 = new GameStats(matchSettings.p1Name, matchSettings.p2Name, player1.setsWon.ToString(), player1.legsWon.ToString(), player2.setsWon.ToString(), player2.legsWon.ToString()
-                                , player1.average.ToString(), player2.average.ToString(), player1.dartNumber.ToString(), player2.dartNumber.ToString(), matchSettings.p2Name);
+                            l1.Text = p1Score.ToString();
+                            l2.Text = p2Score.ToString();
+                            check1.Text = "No Checkout";
+                            check2.Text = "No Checkout";
 
-                            writeStats(gs1);
-                            Navigation.PopAsync();
+                            if (player2.legsWon == 3)
+                            {
+                                player2.legsWon = 0;
+                                player2.setsWon++;
+
+                            }
+
+                            if (player2.setsWon.ToString() == matchSettings.setNumber)
+                            {
+                                p2Score = Convert.ToInt32(l2.Text) - Convert.ToInt32(score.Text);
+                                DisplayAlert("Winner", matchSettings.p2Name + " Wins", "OK");
+
+                                GameStats gs1 = new GameStats(matchSettings.p1Name, matchSettings.p2Name, player1.setsWon.ToString(), player1.legsWon.ToString(), player2.setsWon.ToString(), player2.legsWon.ToString()
+                                    , player1.average.ToString(), player2.average.ToString(), player1.dartNumber.ToString(), player2.dartNumber.ToString(), matchSettings.p2Name);
+
+                                writeStats(gs1);
+                                Navigation.PopAsync();
+                            }
+
                         }
 
+                        l2.Text = p2Score.ToString();
+                        checkout = searchCheckouts(l2.Text);
+                        check2.Text = checkout;
+                        score.Text = "";
+                        playerTurn = 1;
+                        UpdateUI();
                     }
-
-                    l2.Text = p2Score.ToString();
-                    checkout = searchCheckouts(l2.Text);
-                    check2.Text = checkout;
-                    score.Text = "";
-                    playerTurn = 1;
-                    UpdateUI();
+                    else
+                    {
+                        DisplayAlert("ERROR", "Entered value greater than 180", "OK");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    DisplayAlert("ERROR", "Entered value greater than 180", "OK");
+
+                    DisplayAlert("ERROR", "Please Enter a Number", "OK");
                 }
+                
                 
             }
 
@@ -382,7 +399,7 @@ namespace MobileApps2Project
             {
                 Placeholder = "SCORE",
                 WidthRequest = 250,
-                HeightRequest = 35,
+                HeightRequest = 40,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
                 
@@ -401,7 +418,6 @@ namespace MobileApps2Project
                 StyleId = "0",
                 Text = "Enter",
                 TextColor = Color.White,
-                CornerRadius = 10
         };
 
             enter.Clicked += Enter_Clicked;
@@ -426,7 +442,7 @@ namespace MobileApps2Project
                             Text = counter.ToString(),
                             StyleId = counter.ToString(),
                             TextColor = Color.White,
-                            CornerRadius = 10
+
                         };
 
                         btn.Clicked += BtnAdd_Clicked;
@@ -446,7 +462,7 @@ namespace MobileApps2Project
                                 StyleId = "0",
                                 Text = "0",
                                 TextColor = Color.White,
-                                CornerRadius = 10
+
                     };
 
                             btn.Clicked += BtnAdd_Clicked;
@@ -463,7 +479,7 @@ namespace MobileApps2Project
                                 BackgroundColor = Color.DarkSlateGray,
                                 Text = "DEL",
                                 TextColor = Color.White,
-                                CornerRadius = 10,
+
 
                             };
 

@@ -6,7 +6,7 @@
     <ContentPage.Resources>
         <DataTemplate x:Key="statsList">
             <ViewCell>
-                <StackLayout x:Name="statStk"  Padding="10" Margin="10">
+                <StackLayout x:Name="statStk" BackgroundColor="LightGray" Padding="10" Margin="10">
 
                     <Grid>
                         <Grid.ColumnDefinitions>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApps2Project.MatchPage">
     <ContentPage.Content>
-        <StackLayout x:Name="matchStk" BackgroundColor="LightSlateGray">
+        <StackLayout x:Name="matchStk" BackgroundColor="LightGray">
 
             <StackLayout Padding="0" Spacing="0" x:Name="toolbarStk">
                 <Label x:Name="bar"/>
@@ -44,7 +44,7 @@
                 </StackLayout>
 
 
-                <Grid Grid.Row="1" ColumnSpacing="0" Margin="-8" x:Name="buttons"  BackgroundColor="LightSlateGray">
+                <Grid Grid.Row="1" ColumnSpacing="0" Margin="-8" x:Name="buttons"  BackgroundColor="LightGray">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>

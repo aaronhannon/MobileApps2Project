@@ -33,11 +33,7 @@ namespace MobileApps2Project.Pages
             bar.FontSize = 18;
             bar.FontAttributes = FontAttributes.Bold;
 
-            //refresh.HorizontalOptions = LayoutOptions.End;
-
-            //getMongoData();
-            //new Color(Color.HSBtoRGB((float)Math.random(), (float)Math.random, 0.5F + ((float)Math.random()) / 2F));
-            
+ 
         }
 
         public void getMongoData()

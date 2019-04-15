@@ -98,8 +98,8 @@ namespace MobileApps2Project
             {
                 Placeholder = "Player 1",
                 WidthRequest = 200,
-                HeightRequest = 35,
-                HorizontalOptions = LayoutOptions.Center,
+                HeightRequest = 40,
+                HorizontalOptions = LayoutOptions.End,
                 VerticalOptions = LayoutOptions.Center
             };
 
@@ -107,17 +107,17 @@ namespace MobileApps2Project
             {
                 Placeholder = "Player 2",
                 WidthRequest = 200,
-                HeightRequest = 35,
-                HorizontalOptions = LayoutOptions.Center,
+                HeightRequest = 40,
+                HorizontalOptions = LayoutOptions.End,
                 VerticalOptions = LayoutOptions.Center
             };
 
             testStartScore = new Entry()
             {
-                Placeholder = "301,501,701",
+                Placeholder = "301 OR 501 OR 701",
                 WidthRequest = 200,
-                HeightRequest = 35,
-                HorizontalOptions = LayoutOptions.Center,
+                HeightRequest = 40,
+                HorizontalOptions = LayoutOptions.End,
                 VerticalOptions = LayoutOptions.Center
             };
 
@@ -125,8 +125,8 @@ namespace MobileApps2Project
             {
                 Placeholder = "(3 legs in a set)",
                 WidthRequest = 200,
-                HeightRequest = 35,
-                HorizontalOptions = LayoutOptions.Center,
+                HeightRequest = 40,
+                HorizontalOptions = LayoutOptions.End,
                 VerticalOptions = LayoutOptions.Center
             };
 
@@ -158,7 +158,8 @@ namespace MobileApps2Project
 
         private async void StartBtn_Clicked(object sender, EventArgs e)
         {
-            if (testStartScore.Text == "301" || testStartScore.Text == "501" || testStartScore.Text == "701")
+            if ((testStartScore.Text == "301" || testStartScore.Text == "501" || testStartScore.Text == "701")
+                    && player1.Text != null && player2.Text != null && setNumber.Text != null)
             {
                 MatchSettings ms = new MatchSettings(player1.Text, player2.Text, testStartScore.Text,setNumber.Text);
                 await Navigation.PushAsync(new MatchPage(ms, checkouts));
@@ -166,7 +167,7 @@ namespace MobileApps2Project
             }
             else
             {
-                DisplayAlert("ERROR", "Please enter 301,501 or 701", "OK");
+                DisplayAlert("ERROR", "Please Enter all Values", "OK");
             }
         }
     }
